@@ -32,8 +32,8 @@ class EmailController extends Controller
 
     public function next() {
         $latest = Email::orderBy('id', 'DESC')->limit(1)->get();
-        dd($latest);
-        if($latest) {
+
+        if(isset($latest[0])) {
             return response("Most recent set email ID: {$latest[0]->id}", 200);
         }
 
