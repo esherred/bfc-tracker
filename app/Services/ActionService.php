@@ -18,8 +18,9 @@ class ActionService {
     $action->recipiant_id = $recipiant->id;
     $action->save();
 
-    WebhookCall::create()
-      ->url('https://hooks.zapier.com/hooks/catch/3150327/3wh54u8/')
+    if(env('ZAPIER_WEBHOOK') !== false) {
+      WebhookCall::create()
+      ->url(env('ZAPIER_WEBHOOK'))
       ->payload(
         [
           'from_name' => $email->from_name,
@@ -31,6 +32,7 @@ class ActionService {
       )
       ->useSecret('sign-using-this-secret')
       ->dispatch();
+    }
   }
 
   public static function trackClick(
@@ -45,20 +47,22 @@ class ActionService {
     $action->url = $url;
     $action->save();
 
-    WebhookCall::create()
-      ->url('https://hooks.zapier.com/hooks/catch/3150327/3wh54u8/')
-      ->payload(
-        [
-          'from_name' => $email->from_name,
-          'from_email' => $email->from_email,
-          'subject' => $email->subject,
-          'type' => $action->type,
-          'recipiant' => $recipiant->email,
-          'url' => $url,
-        ]
-      )
-      ->useSecret('sign-using-this-secret')
-      ->dispatch();
+    if (env('ZAPIER_WEBHOOK') !== false) {
+      WebhookCall::create()
+        ->url(env('ZAPIER_WEBHOOK'))
+        ->payload(
+          [
+            'from_name' => $email->from_name,
+            'from_email' => $email->from_email,
+            'subject' => $email->subject,
+            'type' => $action->type,
+            'recipiant' => $recipiant->email,
+            'url' => $url,
+          ]
+        )
+        ->useSecret('sign-using-this-secret')
+        ->dispatch();
+    }
   }
 
   public static function trackSend(
@@ -71,18 +75,20 @@ class ActionService {
     $action->recipiant_id = $recipiant->id;
     $action->save();
 
-    WebhookCall::create()
-      ->url('https://hooks.zapier.com/hooks/catch/3150327/3wh54u8/')
-      ->payload(
-        [
-          'from_name' => $email->from_name,
-          'from_email' => $email->from_email,
-          'subject' => $email->subject,
-          'type' => $action->type,
-          'recipiant' => $recipiant->email
-        ]
-      )
-      ->useSecret('sign-using-this-secret')
-      ->dispatch();
+    if (env('ZAPIER_WEBHOOK') !== false) {
+      WebhookCall::create()
+        ->url(env('ZAPIER_WEBHOOK'))
+        ->payload(
+          [
+            'from_name' => $email->from_name,
+            'from_email' => $email->from_email,
+            'subject' => $email->subject,
+            'type' => $action->type,
+            'recipiant' => $recipiant->email
+          ]
+        )
+        ->useSecret('sign-using-this-secret')
+        ->dispatch();
+    }
   }
 }
