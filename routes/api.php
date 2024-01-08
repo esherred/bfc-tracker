@@ -15,3 +15,4 @@ Route::get('/send', [ActionController::class, 'send']);
 
 Route::post('/email/set', [EmailController::class, 'set']);
 Route::get('/email/get', [EmailController::class, 'get']);
+Route::get('/email/next', [EmailController::class, 'next']);

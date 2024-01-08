@@ -29,4 +29,14 @@ class EmailController extends Controller
         return
         response(Email::all(), 200);
     }
+
+    public function next() {
+        $latest = Email::orderBy('id', 'DESC')->limit(1)->get();
+
+        if($latest[0]) {
+            return response("Most recent set email ID: {$latest[0]->id}", 200);
+        }
+
+        return response("No set emails, next ID will be 1", 200);
+    }
 }
