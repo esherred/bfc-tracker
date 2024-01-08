@@ -13,4 +13,5 @@ Route::get('/open', [ActionController::class, 'open']);
 Route::get('/click', [ActionController::class, 'click']);
 Route::get('/send', [ActionController::class, 'send']);
 
-Route::post('/email', [EmailController::class, 'set']);
+Route::post('/email/set', [EmailController::class, 'set']);
+Route::get('/email/get', [EmailController::class, 'get']);

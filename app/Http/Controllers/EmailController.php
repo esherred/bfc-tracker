@@ -24,4 +24,9 @@ class EmailController extends Controller
 
         return response('No email created', 400);
     }
+
+    public function get() {
+        return
+        response(Email::all(), 200);
+    }
 }
