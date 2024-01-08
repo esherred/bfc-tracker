@@ -19,7 +19,7 @@ class EmailController extends Controller
             $email->subject = $request->subject;
             $email->save();
 
-            return response('Email created', 200);
+            return response($email, 200);
         }
 
         return response('No email created', 400);
@@ -27,7 +27,7 @@ class EmailController extends Controller
 
     public function get() {
         return
-        response(Email::all(), 200);
+        response(Email::orderBy('id', 'DESC')->get(), 200);
     }
 
     public function next() {
