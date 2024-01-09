@@ -33,6 +33,8 @@ class ActionService {
       ->useSecret('sign-using-this-secret')
       ->dispatch();
     }
+
+    return $action;
   }
 
   public static function trackClick(
@@ -63,6 +65,8 @@ class ActionService {
         ->useSecret('sign-using-this-secret')
         ->dispatch();
     }
+
+    return $action;
   }
 
   public static function trackSend(
@@ -90,5 +94,7 @@ class ActionService {
         ->useSecret('sign-using-this-secret')
         ->dispatch();
     }
+
+    return $action;
   }
 }

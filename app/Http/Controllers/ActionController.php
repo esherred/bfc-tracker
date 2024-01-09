@@ -22,12 +22,17 @@ class ActionController extends Controller
       $email = Email::find($request->id);
 
       if($email) {
-        ActionService::trackSend(
-          $email,
-          $recipiant
+        return response(
+          ActionService::trackSend(
+            $email,
+            $recipiant
+          ),
+          200
         );
       }
     }
+
+    return response([], 200);
   }
 
   public function open(Request $request)
@@ -40,12 +45,17 @@ class ActionController extends Controller
       $email = Email::find($request->id);
 
       if($email) {
-        ActionService::trackOpen(
-          $email,
-          $recipiant
+        return response(
+          ActionService::trackOpen(
+            $email,
+            $recipiant
+          ),
+          200
         );
       }
     }
+
+    return response([], 200);
   }
 
   public function click(Request $request)
